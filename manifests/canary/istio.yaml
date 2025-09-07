@@ -1,0 +1,31 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: sample-app
+spec:
+  host: sample-app
+  subsets:
+    - name: v1
+      labels:
+        version: v1
+    - name: v2
+      labels:
+        version: v2
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: sample-app
+spec:
+  hosts:
+    - sample-app
+  http:
+    - route:
+        - destination:
+            host: sample-app
+            subset: v1
+          weight: 90
+        - destination:
+            host: sample-app
+            subset: v2
+          weight: 10

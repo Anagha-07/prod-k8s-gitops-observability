@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: incident-tracker
+  labels:
+    release: monitoring  # IMPORTANT: Must match Prometheus release label
+spec:
+  selector:
+    matchLabels:
+      app: incident-tracker
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 15s

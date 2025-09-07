@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: incident-tracker
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - istio-system/istio-ingressgateway
+  http:
+    - match:
+        - uri:
+            prefix: /incident
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: incident-tracker
+            port:
+              number: 80

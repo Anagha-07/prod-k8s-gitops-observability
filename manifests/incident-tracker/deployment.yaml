@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: incident-tracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: incident-tracker
+  template:
+    metadata:
+      labels:
+        app: incident-tracker
+    spec:
+      containers:
+        - name: incident-tracker
+          image: anagha7/incident-tracker:v1
+          ports:
+            - containerPort: 5000

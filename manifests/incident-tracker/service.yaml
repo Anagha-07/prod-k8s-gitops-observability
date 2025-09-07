@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: incident-tracker
+  labels:
+    app: incident-tracker
+spec:
+  selector:
+    app: incident-tracker
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5000
+    - name: metrics
+      port: 9100
+      targetPort: 9100
